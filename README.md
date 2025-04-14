@@ -2,39 +2,87 @@
 
 [Table of Contents](/toc.md)
 
-## Lecture 4 - 10 Apr 2025
+### Lecture 5 - 15 Apr 2025
 
-In this lecture we created the **Hello World** app of flutter using
-```zsh
-flutter create csen268_s25
-```
-where **csen268_s25** is the project name.
+In this lecture we will look at layout elements but to be able to do that we need widgets to fill the screen and using various packages we will create random objects. 
 
-### Stateless Widget    
-We create a stateless widget called `PaddedText` which takes two arguments, the `text` value and the `padding` value which are `String` and `double` types respectively.
-```dart
-import 'package:flutter/material.dart';
+#### Lorem package
 
-class PaddedText extends StatelessWidget {
-  final String text;
-  final double padding;
-  const PaddedText({super.key, required this.text, this.padding = 8.0});
+For this we will utilize a package called `flutter_lorem` to generate placeholder text in our application while we are preparing the UI. In your terminal at the root directory of your project do the following to add the package to your project:
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(padding),
-      color: Colors.red,
-      child: Text(text),
+    flutter pub add flutter_lorem
+
+#### Math library
+
+We will also utilize random integers from `dart:math` library. To import the library the customary command is:
+
+    import 'dart:math' as math;
+
+To generate a random integer between 0 (including) and 10 (excluding) the command is:
+
+    int i = math.Random().nextInt(10)
+
+#### Placeholder Images
+
+We will also need placeholder images. This is available at [Placehold](https://placehold.co/) with a number of options. We can use it in the following manner:
+
+    String imagePath = 'https://placehold.co/600x400/orange/white.png'
+
+#### List of color names
+
+Where we will have a **List** of colors matching **CSS** colors and we will randomly pick a number and pick the color name from the **List** of 10 colors. Create a list with the following colors and save them in `constants.dart` file:
+
+    green, red, orange, yellow, blue, pink, cyan, magenta, coral, brown
+
+#### Unique ID generator
+
+We use the `uuid` package. To install
+
+    flutter pub add 
+
+To use we can use the `v4` by calling
+
+    String id = UuidV4().generate();
+
+## User Class
+
+Create a **User** class with the following properties:
+
+    String firstName
+    String lastName
+    String uid
+    String email
+    String imageUrl
+
+Use the **Data Class Generator** extension in VSCode to add methods to the `User` class
+
+Crate a `List` of `User` objects where you create the object as
+
+    User user = User(
+        firstName: <From lorem package, 1 paragraph, 1 word>,
+        lastName: <similar to above>,
+        email:  <Construct random email from 1 word lorems>, 
+        imageUrl: 'https://placehold.co/600x400/<randomColor>/<randomColor>.png', 
+        uid: <From uuid package>
     );
-  }
-}
 
-```
-We need to note here that:
-1. `text` is a `named` and `required` parameter
-2. `padding` is a `named` but `optional` parameter which defaults to 8.0
-3. The `key` is an optional identifier for widgets. When we pass a key to an object, with the `super.key` construct, this key is passed over to the `StatelessWidget` which is the `super class` of the `PaddedText` widget created here.
+### Setting up your environment before the lecture
 
+Each lecture is stored under a separate tag. In your computer do the following
+
+    git clone <Repository Name>
+    git pull
+    git tag -l
+
+This will list you all the tags in the repository such as
+
+    Lecture4
+    Lecture5
+    Lecture6
+    ...
+
+In order to pull a particular tag to your computer
+
+    git checkout tags/Lecture5_start -b Lecture5_study
 
 
