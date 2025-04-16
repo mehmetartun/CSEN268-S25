@@ -2,69 +2,46 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 5 - 15 Apr 2025
+### Lecture 5 - Step 2 - 15 Apr 2025
 
-In this lecture we will look at layout elements but to be able to do that we need widgets to fill the screen and using various packages we will create random objects. 
+What we created in this lecture are as follows
 
-#### Lorem package
+### Mock Service
 
-For this we will utilize a package called `flutter_lorem` to generate placeholder text in our application while we are preparing the UI. In your terminal at the root directory of your project do the following to add the package to your project:
+We created a `Mock` class to enable random generation of users. 
+```dart
+const List<String> colors = [
+  "green",
+  ...
+  "brown"
+];
 
-    flutter pub add flutter_lorem
+class Mock {
+  static String firstName() {
+    return lorem(paragraphs: 1, words: 1).replaceAll(".", "");
+  }
+  ...
+}
 
-#### Math library
+```
+The `Mock` class has `static` methods which can be called without instantiating the class. They give us a first name, last name, email, user id, and an image url for creating mock users.
 
-We will also utilize random integers from `dart:math` library. To import the library the customary command is:
+### The User Class
+The `User` class is important as it allows us to load a `User` from the database. We need methods such as creation from `json` as well as output to `json` for saving into the database and also methods to create mock users.
 
-    import 'dart:math' as math;
+Here we used the data generation extension to automatically create the methods associated with loading the objects from database and writing to database. In particular some of these methods are:
 
-To generate a random integer between 0 (including) and 10 (excluding) the command is:
+- `toMap`,`toJson` for converting the `User` into a `Map` or `json`
+- `fromMap`, `fromJson` for creating a `User` from a `Map` or `json`
+- `toString` override for printing out the `User` when used in a `print()` or  string interpolation.
+- `createMockUser` to create a `User` using the `Mock` service
 
-    int i = math.Random().nextInt(10)
+### The Widgets
 
-#### Placeholder Images
+We also created some widgets that enable us to display our `User`. These are `UserCard` and `UserListTile`. They both take a `User` object as input.
 
-We will also need placeholder images. This is available at [Placehold](https://placehold.co/) with a number of options. We can use it in the following manner:
 
-    String imagePath = 'https://placehold.co/600x400/orange/white.png'
 
-#### List of color names
-
-Where we will have a **List** of colors matching **CSS** colors and we will randomly pick a number and pick the color name from the **List** of 10 colors. Create a list with the following colors and save them in `constants.dart` file:
-
-    green, red, orange, yellow, blue, pink, cyan, magenta, coral, brown
-
-#### Unique ID generator
-
-We use the `uuid` package. To install
-
-    flutter pub add 
-
-To use we can use the `v4` by calling
-
-    String id = UuidV4().generate();
-
-## User Class
-
-Create a **User** class with the following properties:
-
-    String firstName
-    String lastName
-    String uid
-    String email
-    String imageUrl
-
-Use the **Data Class Generator** extension in VSCode to add methods to the `User` class
-
-Crate a `List` of `User` objects where you create the object as
-
-    User user = User(
-        firstName: <From lorem package, 1 paragraph, 1 word>,
-        lastName: <similar to above>,
-        email:  <Construct random email from 1 word lorems>, 
-        imageUrl: 'https://placehold.co/600x400/<randomColor>/<randomColor>.png', 
-        uid: <From uuid package>
-    );
 
 ### Setting up your environment before the lecture
 
@@ -76,13 +53,14 @@ Each lecture is stored under a separate tag. In your computer do the following
 
 This will list you all the tags in the repository such as
 
-    Lecture4
-    Lecture5
-    Lecture6
+    L05.00
+    L05.01
+    ...
+    L06.00
     ...
 
 In order to pull a particular tag to your computer
 
-    git checkout tags/Lecture5_start -b Lecture5_study
+    git checkout tags/L05.02 -b l05_02
 
 
