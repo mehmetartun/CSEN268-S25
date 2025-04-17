@@ -40,7 +40,24 @@ Here we used the data generation extension to automatically create the methods a
 
 We also created some widgets that enable us to display our `User`. These are `UserCard` and `UserListTile`. They both take a `User` object as input.
 
+### The User List Page
 
+In this page we use `ListView` to display users which we created using the `List.generate` method:
+```dart
+    List<User> userList = List.generate(20, (index) {
+      return User.createMockUser();
+    });
+```
+We then display this list in our page with a `ListView` as the `body` of our `Scaffold`.
+```dart
+      body: ListView(
+        children:
+            userList.map((user) {
+              return UserListTile(user: user);
+            }).toList(),
+      ),
+```
+In the most basic usage `ListView` takes the `children` argument and which would be `List` of `Widget`. Other constructors and more info can be found at [ListView](https://api.flutter.dev/flutter/widgets/ListView-class.html)
 
 
 ### Setting up your environment before the lecture
