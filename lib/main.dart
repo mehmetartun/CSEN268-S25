@@ -1,3 +1,6 @@
+import 'package:csen268_s25/pages/home_page.dart';
+import 'package:csen268_s25/pages/sign_in/sign_in_page.dart';
+import 'package:csen268_s25/pages/stateful_login_page.dart';
 import 'package:csen268_s25/repositories/authentication/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +26,13 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const LoginPage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const HomePage(),
+          '/noBloc': (context) => const StatefulLoginPage(),
+          '/bloc': (context) => const SignInPage(),
+          '/cubit': (context) => const LoginPage(),
+        },
       ),
     );
   }
