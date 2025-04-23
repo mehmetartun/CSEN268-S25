@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
 ```
 
 ### Creating a Login Page
-We create a new page as a `StatefulWidget` called [login_page.dart](/lib/pages/login_page.dart) which contains a `Form` that for signing in.
+We create a new page as a `StatefulWidget` called [login_page.dart](/lib/pages/login_page.dart) which contains a `Form` that is used for signing in.
 
 In the initialization phase of this widget we reference the repository and create a handle to it
 ```dart
