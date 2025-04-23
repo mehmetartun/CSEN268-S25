@@ -1,22 +1,32 @@
+import 'package:csen268_s25/model/user.dart';
+import 'package:csen268_s25/repositories/authentication/authentication_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit() : super(LoginInitial());
+  LoginCubit(this.authenticationRepository) : super(LoginInitial());
+  User? user;
 
-  final String className = "CSEN 268";
+  final AuthenticationRepository authenticationRepository;
 
-  void init() async {
-    await Future.delayed(Duration(seconds: 5), () {});
-    error();
+  void init() async {}
+
+  void reset() {
+    user == null;
+    emit(LoginInitial());
   }
 
   void error() {
-    emit(LoginError());
+    emit(LoginError(errorText: "Some unknown error."));
   }
 
-  void printSomething() {
-    print("Something");
+  void loginUser({required String email, required String password}) async {
+    emit(LoginWaiting());
+    user = await authenticationRepository.signIn(
+      email: email,
+      password: password,
+    );
+    emit(LoggedIn());
   }
 }
