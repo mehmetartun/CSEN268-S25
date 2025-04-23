@@ -7,4 +7,5 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 5 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L05.02) Layout Concepts
 - [Lecture 5 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L05.03) User List Page with Mock User ListView
 - [Lecture 6 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L06.00) Starting Lecture 6
-- [Lecture 7 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L06.00) Starting Lecture 7
+- [Lecture 7 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L07.00) Starting Lecture 7
+- [Lecture 7 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L07.01) Partial implementation of Cubit
