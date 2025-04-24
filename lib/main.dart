@@ -1,10 +1,9 @@
-import 'package:csen268_s25/pages/home_page.dart';
-import 'package:csen268_s25/pages/sign_in/sign_in_page.dart';
-import 'package:csen268_s25/pages/stateful_login_page.dart';
+import 'package:csen268_s25/navigation/router.dart';
 import 'package:csen268_s25/repositories/authentication/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'navigation/navigator_route.dart';
 import 'pages/login/login_page.dart';
 
 void main() {
@@ -20,20 +19,27 @@ class MyApp extends StatelessWidget {
       create: (context) {
         return (OktaAuthenticationRepository() as AuthenticationRepository);
       },
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => const HomePage(),
-          '/noBloc': (context) => const StatefulLoginPage(),
-          '/bloc': (context) => const SignInPage(),
-          '/cubit': (context) => const LoginPage(),
-        },
+        routerConfig: router,
       ),
+      // MaterialApp(
+      //     title: 'Flutter Demo',
+      //     theme: ThemeData(
+      //       colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //       useMaterial3: true,
+      //     ),
+      //     initialRoute: NavigatorRoute.home,
+      //     routes: {
+      //       NavigatorRoute.home: (context) => const HomePage(),
+      //       NavigatorRoute.noBloc: (context) => const StatefulLoginPage(),
+      //       NavigatorRoute.bloc: (context) => const SignInPage(),
+      //       NavigatorRoute.cubit: (context) => const LoginPage(),
+      //     }),
     );
   }
 }
