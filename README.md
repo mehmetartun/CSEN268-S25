@@ -2,7 +2,7 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 8 - 24 Apr 2025 - Starting Point 
+### Lecture 8 - 24 Apr 2025 - Implement Go Router with Nested ShellRoute
 
 
 
