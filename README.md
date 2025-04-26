@@ -102,6 +102,57 @@ The `ScaffoldWithNavBar` is a construct to allow the `ShellRoute` to have bottom
 
 In addition the `StreamToListenable` is defined in the [utilities](./lib/utilities) folder as [StreamToListenable](/lib/utilities/stream_to_listenable.dart) which takes a list of streams as argument and turns them to a combined listenable object that is then used to trigger `redirect` everytime the listenable receives an update.
 
+An important item to note is the navigator keys that are being used. For the `profile detail` to be shown **without** the bottom navigation bar, we force the navigator of that page to be the `rootNavigator` rather then the `shellNavigator`. For this, we first create the keys:
+```dart
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: "Root",
+);
+final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>(
+  debugLabel: "Shell",
+);
+```
+and inject them as follows in the `GoRouter` object:
+```dart
+GoRouter routerDemo(AuthenticationBloc authenticationBloc) {
+  return GoRouter(
+    navigatorKey: rootNavigatorKey,
+    initialLocation: '/users',
+    refreshListenable: StreamToListenable([authenticationBloc.stream]),
+    redirect: (context, state) async {
+        ...
+    },
+    routes: [
+      GoRoute(
+        path: '/login',
+        ...
+      ),
+      GoRoute(
+        path: '/',
+        ...
+        routes: [
+          ShellRoute(
+            navigatorKey: shellNavigatorKey,
+            builder: (BuildContext context, GoRouterState state, Widget child) {
+              return ScaffoldWithNavBar(child: child);
+            },
+            routes: <RouteBase>[
+              GoRoute(
+                path: 'users',
+                ...
+              ),
+              GoRoute(
+                path: 'profile',
+                ...
+                routes: [
+                  GoRoute(
+                    path: 'detail',
+                    parentNavigatorKey: rootNavigatorKey,
+                    ...
+                  ),
+}
+```
+
+
 The resulting app is then as:
 <img src="/assets/images/Lecture 0801 Implemented App.gif" width="300">
 
