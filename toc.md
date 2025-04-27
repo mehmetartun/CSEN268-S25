@@ -13,3 +13,5 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 7 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L07.03) Full implementation of Bloc
 - [Lecture 8 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L08.00) Starting Point of GoRouter
 - [Lecture 8 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L08.01) Implementation of GoRouter
+- [Lecture 9 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L09.00) Starting point for image capture and display
+ 
