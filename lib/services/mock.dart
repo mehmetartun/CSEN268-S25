@@ -12,7 +12,7 @@ const List<String> colors = [
   "cyan",
   "magenta",
   "coral",
-  "brown",
+  "brown"
 ];
 
 class Mock {

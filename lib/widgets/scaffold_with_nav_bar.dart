@@ -1,12 +1,16 @@
-import 'package:csen268_s25/navigation/routerdemo.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../navigation/route_name.dart';
 
 /// Builds the "shell" for the app by building a Scaffold with a
 /// BottomNavigationBar, where [child] is placed in the body of the Scaffold.
 class ScaffoldWithNavBar extends StatelessWidget {
   /// Constructs an [ScaffoldWithNavBar].
-  const ScaffoldWithNavBar({required this.child, super.key});
+  const ScaffoldWithNavBar({
+    required this.child,
+    super.key,
+  });
 
   /// The widget to display in the body of the Scaffold.
   /// In this sample, it is a Navigator.
@@ -18,8 +22,14 @@ class ScaffoldWithNavBar extends StatelessWidget {
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Users'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Users',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
         ],
         currentIndex: _calculateSelectedIndex(context),
         onTap: (int idx) => _onItemTapped(idx, context),
@@ -41,9 +51,9 @@ class ScaffoldWithNavBar extends StatelessWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
-        GoRouter.of(context).goNamed(RouteName.users);
+        GoRouter.of(context).goNamed(RouteName.map);
       case 1:
-        GoRouter.of(context).goNamed(RouteName.profile);
+        GoRouter.of(context).goNamed(RouteName.map);
     }
   }
 }
