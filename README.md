@@ -69,6 +69,31 @@ and the associated states to switch between the views is affected by:
             default:
               return NoPermissionView();
 ```
+The initialization of the cubit follows with the `init()` method which retrieves the permissions and contact list:
+```dart
+  void init() async {
+    if (await FlutterContacts.requestPermission()) {
+      permissionType = PermissionType.full;
+      contacts = await FlutterContacts.getContacts(
+        withProperties: true,
+        withPhoto: true,
+      );
+      emit(ContactsPermissionFullAccess(contacts: contacts));
+      return;
+    } else {
+      if (Platform.isAndroid) {
+        if (await FlutterContacts.requestPermission(readonly: true)) {
+          permissionType = PermissionType.readOnly;
+          contacts = await FlutterContacts.getContacts();
+          emit(ContactsPermissionReadOnly(contacts: contacts));
+          return;
+        }
+      }
+    }
+    emit(ContactsPermissionDenied());
+  }
+```
+
 Looking at each of the views, the `ContactsView` will display a list with either an **edit** button or without depending on whether we are in read only mode or not.
 ```dart
         ListView(
