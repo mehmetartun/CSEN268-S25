@@ -32,6 +32,8 @@
 	<string>Access to the location is needed for the app when open.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Access to the location is needed when in the background.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>To facilitate sharing with your contacts, we require access to contacts on your device.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
