@@ -55,7 +55,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    positionStreamSubscription.cancel();
     mapController.dispose();
     super.dispose();
   }
