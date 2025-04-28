@@ -115,6 +115,8 @@ Looking at each of the views, the `ContactsView` will display a list with either
             ),
 ```
 
+<img src="/assets/images/Initial View of Contacts.png" width="300">
+
 Note that the `editContact()` function has to be passed on from the cubit. This is done in the switch statement in the `ContactsPage` widget which has access to the `ContactsCubit`. The view widgets do not have access to the `ContactsCubit`.
 
 The other important view here is the `ContactEditView` which contains a form. This view is a `StatefulWidget` as it contains a `Form`. The `Contact` object is replicated to a local copy (local to the `State` of the `StatefulWidget`) and any changes are modified there. The provided `saveContact()` function is in reality the `saveContact()` method in the `ContactsCubit`. When the `Form` is submitted the `Contact` with modifications is sent to this method.
@@ -149,6 +151,8 @@ The other important view here is the `ContactEditView` which contains a form. Th
                 }
 ```
 
+<img src="/assets/images/Contacts Edit Form.png" width="300">
+
 Inside the `ContactsCubit` the `saveContact` function first emits a `WaitingState` and then updates the contact and subsequently emits a state to view full list of the contacts.
 
 ```dart
@@ -158,6 +162,8 @@ Inside the `ContactsCubit` the `saveContact` function first emits a `WaitingStat
     emit(ContactsPermissionFullAccess(contacts: contacts));
   }
 ```
+
+<img src="/assets/images/Contacts Edit Recording.gif" width="300">
 
 ### Setting up your environment before the lecture
 
