@@ -1,15 +1,27 @@
+import 'dart:io';
+
 import 'package:file_saver/file_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 
 class SaveImage {
   static Future<String> saveImageToGallery(XFile file) async {
-    await FileSaver.instance.saveFile(
-      name: "Hello",
-      filePath: file.path,
-      ext: "jpg",
-      mimeType: MimeType.jpeg,
-    );
+    Directory? application_dir = await getDownloadsDirectory();
 
-    return "OK";
+    if (application_dir != null) {
+      await FileSaver.instance.saveFile(
+        file: File(file.path),
+        name: "Hello",
+        filePath: p.join(application_dir.path, "Hello.jpg"),
+
+        ext: "jpg",
+        mimeType: MimeType.jpeg,
+      );
+
+      return "Saved to ${application_dir.path}";
+    } else {
+      return "Download Directory Not Found";
+    }
   }
 }

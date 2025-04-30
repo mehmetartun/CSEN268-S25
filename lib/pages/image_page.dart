@@ -20,23 +20,34 @@ class _ImagePageState extends State<ImagePage> {
     return Scaffold(
       appBar: AppBar(title: Text("Image Example"), centerTitle: true),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FilledButton(
-              onPressed: () async {
-                _image = await _picker.pickImage(source: ImageSource.gallery);
-                print(_image?.path);
+        child: Container(
+          color: Colors.yellow,
+          width: double.infinity,
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            color: Colors.red,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FilledButton(
+                  onPressed: () async {
+                    _image = await _picker.pickImage(
+                      source: ImageSource.gallery,
+                    );
+                    print(_image?.path);
 
-                if (_image != null) {
-                  await SaveImage.saveImageToGallery(_image!);
-                  setState(() {});
-                }
-              },
-              child: Text("Pick Image"),
+                    if (_image != null) {
+                      var result = await SaveImage.saveImageToGallery(_image!);
+                      print(result);
+                      setState(() {});
+                    }
+                  },
+                  child: Text("Pick Image"),
+                ),
+                if (_image != null) DisplayImage.displayImage(_image!),
+              ],
             ),
-            if (_image != null) DisplayImage.displayImage(_image!),
-          ],
+          ),
         ),
       ),
     );
