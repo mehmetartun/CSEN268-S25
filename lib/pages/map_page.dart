@@ -47,6 +47,7 @@ class _MapPageState extends State<MapPage> {
         distanceFilter: 0,
       ),
     ).listen((Position position) {
+      print(position);
       mapController.animateCamera(
         CameraUpdate.newLatLng(LatLng(position.latitude, position.longitude)),
       );
@@ -56,6 +57,7 @@ class _MapPageState extends State<MapPage> {
   @override
   void dispose() {
     // TODO: implement dispose
+    positionStreamSubscription.cancel();
     mapController.dispose();
     super.dispose();
   }
