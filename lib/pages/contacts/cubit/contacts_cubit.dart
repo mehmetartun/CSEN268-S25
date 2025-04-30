@@ -41,6 +41,7 @@ class ContactsCubit extends Cubit<ContactsState> {
 
   void saveContact(Contact contact) async {
     emit(WaitingState());
+    await Future.delayed(Duration(seconds: 4), () {});
     await contact.update();
     emit(ContactsPermissionFullAccess(contacts: contacts));
   }

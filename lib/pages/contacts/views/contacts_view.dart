@@ -19,6 +19,7 @@ class ContactsView extends StatelessWidget {
       body: Column(
         children: [
           Text("Here are your contacts"),
+          FilledButton(child: Text("Hello"), onPressed: () {}),
           Expanded(
             child: ListView(
               children:
