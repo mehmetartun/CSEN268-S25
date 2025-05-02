@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../services/display_image/display_image.dart';
 import '../services/save_image/save_image.dart';
@@ -14,40 +17,92 @@ class ImagePage extends StatefulWidget {
 class _ImagePageState extends State<ImagePage> {
   ImagePicker _picker = ImagePicker();
   XFile? _image;
+  Directory? dir;
+  List<String> files = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getDirs();
+    super.initState();
+  }
+
+  void getDirs() async {
+    dir = await getApplicationDocumentsDirectory();
+    files = [];
+    dir!.list().listen(
+      (file) {
+        files.add(file.path);
+      },
+      onDone: () {
+        setState(() {});
+      },
+    );
+
+    setState(() {});
+  }
+
+  void showSnackBar(String text) {
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Image Example"), centerTitle: true),
-      body: SingleChildScrollView(
-        child: Container(
-          color: Colors.yellow,
-          width: double.infinity,
-          padding: const EdgeInsets.all(20.0),
-          child: Container(
-            color: Colors.red,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FilledButton(
-                  onPressed: () async {
-                    _image = await _picker.pickImage(
-                      source: ImageSource.gallery,
-                    );
-                    print(_image?.path);
-
-                    if (_image != null) {
-                      var result = await SaveImage.saveImageToGallery(_image!);
-                      print(result);
-                      setState(() {});
-                    }
-                  },
-                  child: Text("Pick Image"),
-                ),
-                if (_image != null) DisplayImage.displayImage(_image!),
-              ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (dir != null) Text("Saving to ${dir!.path}"),
+            FilledButton(
+              onPressed: () async {
+                _image = await _picker.pickImage(source: ImageSource.camera);
+                if (_image != null) {
+                  var result = await SaveImage.saveImageToGallery(_image!);
+                  showSnackBar(result);
+                  setState(() {});
+                }
+              },
+              child: Text("Take Photo"),
             ),
-          ),
+            FilledButton(
+              onPressed: () async {
+                _image = await _picker.pickImage(source: ImageSource.gallery);
+                if (_image != null) {
+                  var result = await SaveImage.saveImageToGallery(_image!);
+                  showSnackBar(result);
+                  getDirs();
+                }
+              },
+              child: Text("Pick Image"),
+            ),
+            if (_image != null)
+              SizedBox(height: 300, child: DisplayImage.displayImage(_image!)),
+            Text("Images saved to the Application directory"),
+            if (files.isNotEmpty)
+              Expanded(
+                child: ListView(
+                  primary: false,
+                  children:
+                      files
+                          .where((file) {
+                            return file.endsWith(".jpg");
+                          })
+                          .toList()
+                          .map((file) {
+                            return ListTile(
+                              title: Text(file),
+                              leading: DisplayImage.displayImage(XFile(file)),
+                            );
+                          })
+                          .toList(),
+                ),
+              ),
+          ],
         ),
       ),
     );
