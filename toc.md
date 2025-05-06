@@ -18,3 +18,4 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 9 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L09.02) Implemented Google Maps
 - [Lecture 9 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L09.03) Implemented  Contacts
 - [Lecture 10 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L10.00) Starting Point for Firebase Implementation
+- [Lecture 10 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L10.01) Firebase Options Added to the Project

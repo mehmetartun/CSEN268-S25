@@ -2,22 +2,39 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 10 - Starting Point - Firebase Integration
+### Lecture 10 - Step 1 -  Firebase Integration Complete
 
-In this lecture we add Firebase to our project.
+Following the instructions in the slide we have now integrated our 3 apps from Firebase into our project.
 
-Import `firebase_core.dart` library 
-```
-flutter pub add firebase_core
-```
+We ran `flutterfire configure` in the root directory of our app and then chose the firebase project we want to connect. Having created **iOS**, **Android**, and **Web** apps in the firebase project we choose only these three options to configure flutterfire.
 
-and add the line
+At the end of the configuration `flutterfire` brings in the necessary `GoogleService-Info.plist` file into **iOS** and the `google-services.json` file into the **android** directories.
+
+In the [main.dart](/lib/main.dart) we invoke Firebase by
 ```dart
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MyApp());
+}
 ```
-in your [main.dart](/lib/main.dart) file.
 
-Normally this binding will be initialized after the `runApp()` command is run. However for Firebase to work and for us to initialize the FirebaseApp in `main()` we must call this to force it.
+Then the app loads up `FirestorePage` which displays a button:
+```dart
+        FilledButton(
+          child: Text("Add to Firestore"),
+          onPressed: () async {
+            FirebaseFirestore.instance.collection('test').add({
+              'value': 'test @ ${DateTime.now().millisecondsSinceEpoch}',
+            });
+          },
+        )
+```
+that adds a document to the `test` collection. The document added is an object with only one property `value`. By using `add` command we imply that the document ID is automatically generated.
+
+### Cleaning up bundle identifier and package name
+
+It's possible that your project was created with a package name of `com.example.???`. In this case adding Firebase with the `flutterfire` route will still 
 
 ### Setting up your environment before the lecture
 
