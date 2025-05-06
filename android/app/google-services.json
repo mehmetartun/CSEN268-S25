@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150259610200",
+    "project_id": "csen268-s25-g0",
+    "storage_bucket": "csen268-s25-g0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150259610200:android:b05995d2197f8c7d36902d",
+        "android_client_info": {
+          "package_name": "com.csen268.s25.g0"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYb6h5ITGg7h65Yv7TjtsdLRh2TyqyspQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
