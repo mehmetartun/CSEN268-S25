@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'navigation/route_name.dart';
+import 'pages/generic_page.dart';
 import 'pages/image_page.dart';
 import 'repositories/authentication/authentication_repository.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: ContactsPage(),
+        home: GenericPage(title: "Firebase Integration"),
       ),
     );
   }
