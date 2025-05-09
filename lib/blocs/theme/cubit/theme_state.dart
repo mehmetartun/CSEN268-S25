@@ -4,5 +4,5 @@ part of 'theme_cubit.dart';
 final class ThemeState {
   final ThemeMode themeMode;
 
-  ThemeState({required this.themeMode});
+  const ThemeState({required this.themeMode});
 }
