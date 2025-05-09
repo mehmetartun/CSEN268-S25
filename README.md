@@ -2,17 +2,54 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 12 - Step 1 - Implemented - Dialog Sheets and Bottom Sheets
+### Lecture 12 - Step 2 - Implemented - Adding a Theme
 
-![Slide 1](/assets/images/Mod02.png)
-![Slide 2](/assets/images/Mod03.png)
-![Slide 3](/assets/images/Mod04.png)
-![Slide 4](/assets/images/Mod05.png)
-![Slide 5](/assets/images/Mod06.png)
-![Slide 6](/assets/images/Mod07.png)
-![Slide 7](/assets/images/Mod08.png)
-![Slide 8](/assets/images/Mod09.png)
-![Slide 9](/assets/images/Mod10.png)
+We start by creating a Material Theme in Figma.
+
+<img src="/assets/images/Figma_start_material.png" alt="Material Theme Builder" width="200">
+
+Choose the colors
+
+<img src="/assets/images/Material2.png" alt="Material Theme Builder" width="200">
+
+And export to Flutter
+
+<img src="/assets/images/Material3.png" alt="Material Theme Builder" width="200">
+
+We create a folder `theme` and save the file as `theme.dart`. 
+
+### Google Fonts
+
+We add Google Fonts by
+
+```
+flutter pub add google_fonts
+```
+
+### Adding to the App
+We first create a `TextTheme` in the app:
+```dart
+    TextTheme textTheme = createTextTheme(
+      context,
+      "Roboto",
+      "Playfair Display",
+    );
+```
+Then we create our `MaterialTheme` class based on this `TextTheme`
+```dart
+    MaterialTheme theme = MaterialTheme(textTheme);
+```
+Finally we inject it to the App with all possible color modes for dark, light, high contrast etc.
+
+```dart
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: theme.light(),
+          darkTheme: theme.dark(),
+          highContrastDarkTheme: theme.darkHighContrast(),
+          highContrastTheme: theme.lightHighContrast(),
+          themeMode: ThemeMode.light,
+```
 
 ### Setting up your environment before the lecture
 
