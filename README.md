@@ -2,55 +2,64 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 12 - Step 2 - Implemented - Adding a Theme
+### Lecture 12 - Step 3 - Implemented - Adding ThemeCubit
 
-We start by creating a Material Theme in Figma.
-
-<img src="/assets/images/Figma_start_material.png" alt="Material Theme Builder" width="200">
-
-Choose the colors
-
-<img src="/assets/images/Material2.png" alt="Material Theme Builder" width="200">
-
-And export to Flutter
-
-<img src="/assets/images/Material3.png" alt="Material Theme Builder" width="200">
-
-We create a folder `theme` and save the file as `theme.dart`. 
-
-### Google Fonts
-
-We add Google Fonts by
-
-```
-flutter pub add google_fonts
-```
-
-### Adding to the App
-We first create a `TextTheme` in the app:
+Our `ThemeCubit` is responsible for holding the state of the theme brightness. It has only one state and passes the `ThemeMode` enum on every state change:
 ```dart
-    TextTheme textTheme = createTextTheme(
-      context,
-      "Roboto",
-      "Playfair Display",
-    );
-```
-Then we create our `MaterialTheme` class based on this `TextTheme`
-```dart
-    MaterialTheme theme = MaterialTheme(textTheme);
-```
-Finally we inject it to the App with all possible color modes for dark, light, high contrast etc.
+final class ThemeState {
+  final ThemeMode themeMode;
 
+  const ThemeState({required this.themeMode});
+}
+```
+Note here we didn't create an abstract class, we have only one State in this cubit.
+
+In the `main.dart` file we the `ThemeCubit` created in the `MultiBlocProvider` together with `NotificationsBloc`.
 ```dart
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: theme.light(),
-          darkTheme: theme.dark(),
-          highContrastDarkTheme: theme.darkHighContrast(),
-          highContrastTheme: theme.lightHighContrast(),
-          themeMode: ThemeMode.light,
+     child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => NotificationsBloc()..init()),
+          BlocProvider(create: (context) => ThemeCubit()),
+        ],
+        child: ...
+    }
 ```
 
+And we wrap a `BlocBuilder` for the `ThemeState` just outside `MaterialApp`
+```dart
+BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, themeState) {
+              return MaterialApp(
+                ...
+              );
+            },
+          )
+```
+
+We also have a standalone widget `BrightnessSelector` which is defined in [brightness_selector.dart](/lib/widgets/brightness_selector.dart). This widget consists of three icon buttons which display the current brightness and also change it by accessing the `ThemeCubit`.
+```dart
+class BrightnessSelector extends StatelessWidget {
+  Widget build(BuildContext context) {
+    ThemeCubit cubit = BlocProvider.of<ThemeCubit>(context);
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return Container(
+          child: Row(
+            children: [
+              state.themeMode == ThemeMode.light
+                  ? IconButton.filled(
+                    icon: Icon(Icons.light_mode),
+                    onPressed: () {},
+                  )
+                  : IconButton.filledTonal(
+                    icon: Icon(Icons.light_mode),
+                    onPressed: () {
+                      cubit.changeThemeMode(ThemeMode.light);
+                    },
+                  ),
+                  ...
+            ])));
+```
 ### Setting up your environment before the lecture
 
 Each lecture is stored under a separate tag. In your computer do the following
