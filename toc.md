@@ -25,4 +25,4 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 12 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L12.00) Starting point for the Dialog Sheets lecture
 - [Lecture 12 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L12.01) Implemented the Dialog Sheets
 - [Lecture 12 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L12.02) Adding Theme
-
+- [Lecture 12 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L12.03) Implementing Theme Cubit

@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/notifications/bloc/notifications_bloc.dart';
+import 'blocs/theme/cubit/theme_cubit.dart';
 import 'firebase_options.dart';
 
+import 'pages/generic_page.dart';
 import 'pages/messaging_page.dart';
 import 'repositories/authentication/authentication_repository.dart';
 import 'theme/theme.dart';
@@ -78,40 +80,44 @@ class MyApp extends StatelessWidget {
       create: (context) {
         return (OktaAuthenticationRepository() as AuthenticationRepository);
       },
-      child: BlocProvider(
-        create: (context) => NotificationsBloc()..init(),
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: theme.light(),
-          darkTheme: theme.dark(),
-          highContrastDarkTheme: theme.darkHighContrast(),
-          highContrastTheme: theme.lightHighContrast(),
-          themeMode: ThemeMode.light,
-          builder: (context, child) {
-            Widget _child = child ?? Container();
-            return BlocListener<NotificationsBloc, NotificationsState>(
-              listener: (context, state) async {
-                if (state is NotificationsReceivedState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(state.message.notification?.title ?? "<title>"),
-                          Text(state.message.notification?.body ?? "<body>"),
-                          Text("Type: ${state.notificationType.name}"),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-              },
-              child: _child,
-            );
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => NotificationsBloc()..init()),
+          BlocProvider(create: (context) => ThemeCubit()),
+        ],
+        child: BlocListener<NotificationsBloc, NotificationsState>(
+          listener: (context, state) async {
+            if (state is NotificationsReceivedState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(state.message.notification?.title ?? "<title>"),
+                      Text(state.message.notification?.body ?? "<body>"),
+                      Text("Type: //${state.notificationType.name}"),
+                    ],
+                  ),
+                ),
+              );
+            }
           },
-          home: AlertPage(),
+          child: BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, themeState) {
+              return MaterialApp(
+                title: 'Flutter Demo',
+                theme: theme.light(),
+                darkTheme: theme.dark(),
+                highContrastDarkTheme: theme.darkHighContrast(),
+                highContrastTheme: theme.lightHighContrast(),
+                themeMode: themeState.themeMode,
+
+                home: AlertPage(),
+              );
+            },
+          ),
         ),
       ),
     );
