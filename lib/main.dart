@@ -1,3 +1,4 @@
+import 'package:csen268_s25/pages/alert_page.dart';
 import 'package:firebase_app_installations/firebase_app_installations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -99,7 +100,7 @@ class MyApp extends StatelessWidget {
               child: _child,
             );
           },
-          home: MessagingPage(),
+          home: AlertPage(),
         ),
       ),
     );
