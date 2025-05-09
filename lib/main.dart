@@ -10,6 +10,8 @@ import 'firebase_options.dart';
 
 import 'pages/messaging_page.dart';
 import 'repositories/authentication/authentication_repository.dart';
+import 'theme/theme.dart';
+import 'theme/util.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -64,6 +66,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = createTextTheme(
+      context,
+      "Roboto",
+      "Playfair Display",
+    );
+
+    MaterialTheme theme = MaterialTheme(textTheme);
+
     return RepositoryProvider(
       create: (context) {
         return (OktaAuthenticationRepository() as AuthenticationRepository);
@@ -72,10 +82,11 @@ class MyApp extends StatelessWidget {
         create: (context) => NotificationsBloc()..init(),
         child: MaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
+          theme: theme.light(),
+          darkTheme: theme.dark(),
+          highContrastDarkTheme: theme.darkHighContrast(),
+          highContrastTheme: theme.lightHighContrast(),
+          themeMode: ThemeMode.light,
           builder: (context, child) {
             Widget _child = child ?? Container();
             return BlocListener<NotificationsBloc, NotificationsState>(
