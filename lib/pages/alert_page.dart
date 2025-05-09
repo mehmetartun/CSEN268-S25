@@ -1,3 +1,4 @@
+import 'package:csen268_s25/widgets/brightness_selector.dart';
 import 'package:flutter/material.dart';
 
 enum PizzaType { pepperoni, fourSeasons, marinara, margarita }
@@ -20,7 +21,10 @@ class AlertPage extends StatelessWidget {
       //           padding: EdgeInsets.all(20),
       //           child: Text("Persistent Bottom Sheet"));
       //     }),
-      appBar: AppBar(title: Text("Dialog Page")),
+      appBar: AppBar(
+        title: Text("Dialog Page"),
+        actions: [BrightnessSelector()],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
