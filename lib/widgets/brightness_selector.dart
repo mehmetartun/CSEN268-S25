@@ -24,10 +24,7 @@ class BrightnessSelector extends StatelessWidget {
                     icon: Icon(Icons.light_mode),
                     onPressed: () {
                       cubit.changeThemeMode(ThemeMode.light);
-                      Navigator.of(context).pop();
                     },
-
-                    // isSelected: true,
                   ),
               SizedBox(width: 10),
               state.themeMode == ThemeMode.dark
@@ -39,10 +36,7 @@ class BrightnessSelector extends StatelessWidget {
                     icon: Icon(Icons.dark_mode),
                     onPressed: () {
                       cubit.changeThemeMode(ThemeMode.dark);
-                      Navigator.of(context).pop();
                     },
-
-                    // isSelected: true,
                   ),
               SizedBox(width: 10),
               state.themeMode == ThemeMode.system
@@ -54,10 +48,7 @@ class BrightnessSelector extends StatelessWidget {
                     icon: Icon(Icons.smartphone),
                     onPressed: () {
                       cubit.changeThemeMode(ThemeMode.system);
-                      Navigator.of(context).pop();
                     },
-
-                    // isSelected: true,
                   ),
             ],
           ),

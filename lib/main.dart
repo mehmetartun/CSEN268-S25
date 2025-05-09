@@ -113,7 +113,6 @@ class MyApp extends StatelessWidget {
                 highContrastDarkTheme: theme.darkHighContrast(),
                 highContrastTheme: theme.lightHighContrast(),
                 themeMode: themeState.themeMode,
-
                 home: AlertPage(),
               );
             },
