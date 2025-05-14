@@ -15,41 +15,28 @@ class BrightnessSelector extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              state.themeMode == ThemeMode.light
-                  ? IconButton.filled(
-                    icon: Icon(Icons.light_mode),
-                    onPressed: () {},
-                  )
-                  : IconButton.filledTonal(
-                    icon: Icon(Icons.light_mode),
-                    onPressed: () {
-                      cubit.changeThemeMode(ThemeMode.light);
-                    },
-                  ),
-              SizedBox(width: 10),
-              state.themeMode == ThemeMode.dark
-                  ? IconButton.filled(
-                    icon: Icon(Icons.dark_mode),
-                    onPressed: () {},
-                  )
-                  : IconButton.filledTonal(
-                    icon: Icon(Icons.dark_mode),
-                    onPressed: () {
-                      cubit.changeThemeMode(ThemeMode.dark);
-                    },
-                  ),
-              SizedBox(width: 10),
-              state.themeMode == ThemeMode.system
-                  ? IconButton.filled(
-                    icon: Icon(Icons.smartphone),
-                    onPressed: () {},
-                  )
-                  : IconButton.filledTonal(
-                    icon: Icon(Icons.smartphone),
-                    onPressed: () {
-                      cubit.changeThemeMode(ThemeMode.system);
-                    },
-                  ),
+              if (state.themeMode != ThemeMode.light)
+                IconButton.filledTonal(
+                  icon: Icon(Icons.light_mode),
+                  onPressed: () {
+                    cubit.changeThemeMode(ThemeMode.light);
+                  },
+                ),
+              if (state.themeMode != ThemeMode.dark)
+                IconButton.filledTonal(
+                  icon: Icon(Icons.dark_mode),
+                  onPressed: () {
+                    cubit.changeThemeMode(ThemeMode.dark);
+                  },
+                ),
+
+              if (state.themeMode != ThemeMode.system)
+                IconButton.filledTonal(
+                  icon: Icon(Icons.smartphone),
+                  onPressed: () {
+                    cubit.changeThemeMode(ThemeMode.system);
+                  },
+                ),
             ],
           ),
         );
