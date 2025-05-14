@@ -28,6 +28,7 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 12 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L12.03) Implementing Theme Cubit
 - [Lecture 13 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L13.00) Start - Future Builder, Shimmer, Stream Builder
 - [Lecture 13 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L13.01) Implemented Future Builder
-- [Lecture 13 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L13.02) Implemented Future Builder
+- [Lecture 13 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L13.02) Implemented Stream Builder
+- [Lecture 13 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L13.03) Implemented Shimmer 
 
 

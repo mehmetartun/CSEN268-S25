@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csen268_s25/widgets/brightness_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class StreamBuilderPage extends StatelessWidget {
   const StreamBuilderPage({super.key});
@@ -7,11 +9,15 @@ class StreamBuilderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Stream Builder Demo")),
+      appBar: AppBar(
+        title: Text("Stream Builder Demo"),
+        actions: [BrightnessSelector()],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
@@ -38,14 +44,43 @@ class StreamBuilderPage extends StatelessWidget {
                           [],
                     );
                   }
-                  return CircularProgressIndicator();
+                  return ShimmerListWidget();
                 },
                 stream:
                     FirebaseFirestore.instance.collection('cities').snapshots(),
               ),
+              // ShimmerListWidget(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ShimmerListWidget extends StatelessWidget {
+  const ShimmerListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      enabled: true,
+      child: Column(
+        children: List.generate(10, (index) {
+          return Container(
+            height: 15,
+            width: 200,
+            margin: EdgeInsets.all(3),
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(2)),
+              ),
+              color: Colors.white,
+            ),
+          );
+        }),
       ),
     );
   }
