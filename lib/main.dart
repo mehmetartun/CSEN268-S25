@@ -1,5 +1,6 @@
 import 'package:csen268_s25/pages/alert_page.dart';
 import 'package:csen268_s25/pages/future_builder_page.dart';
+import 'package:csen268_s25/pages/stream_builder_page.dart';
 import 'package:firebase_app_installations/firebase_app_installations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -114,7 +115,7 @@ class MyApp extends StatelessWidget {
                 highContrastDarkTheme: theme.darkHighContrast(),
                 highContrastTheme: theme.lightHighContrast(),
                 themeMode: themeState.themeMode,
-                home: FutureBuilderPage(),
+                home: StreamBuilderPage(),
               );
             },
           ),
