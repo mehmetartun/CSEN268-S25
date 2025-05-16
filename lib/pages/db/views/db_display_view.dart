@@ -20,7 +20,11 @@ class DbDisplayView extends StatelessWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return Dialog(child: VehicleInputForm(onSaved: addCar));
+                  return Dialog(
+                    child: SingleChildScrollView(
+                      child: VehicleInputForm(onSaved: addCar),
+                    ),
+                  );
                 },
               );
             },
