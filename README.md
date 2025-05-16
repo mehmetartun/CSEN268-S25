@@ -2,9 +2,22 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 14 -  Starting Point
+### Lecture 14 -  Firebase Operations
 
-In this lecture we look in depth in Firestore operations, reading and writing data as well as collection groups.
+Created a page `db_page.dart` to interact with Firebase with an associated `Cubit`. We also created a new object class `Car` together with it's associated data methods.
+
+```dart
+class Car {
+  final String make;
+  final String model;
+  final String licencePlate;
+  final int year;
+  final DateTime registrationDate;
+  ...
+}
+```
+
+
 
 ### Setting up your environment before the lecture
 
