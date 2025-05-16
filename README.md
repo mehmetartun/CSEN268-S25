@@ -2,9 +2,11 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 14 -  Starting Point
+### Lecture 14 -  Firebase Operations
 
-In this lecture we look in depth in Firestore operations, reading and writing data as well as collection groups.
+Create a page `db_page.dart` to interact with Firebase.
+
+
 
 ### Setting up your environment before the lecture
 
