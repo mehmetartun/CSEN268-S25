@@ -33,6 +33,7 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 14 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L14.00) Starting point - Firestore
 - [Lecture 14 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L14.01) Blank database page createed
 - [Lecture 14 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L14.02) Implement Data Entry 
+- [Lecture 14 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L14.03) Stream Subscription
 
 
 

@@ -80,29 +80,49 @@ class _VehicleInputFormState extends State<VehicleInputForm> {
             },
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: "Registration Date"),
+            decoration: InputDecoration(
+              labelText: "Registration Date",
+              suffix: IconButton(
+                icon: Icon(Icons.calendar_today),
+                onPressed: () async {
+                  DateTime? date = await showDatePicker(
+                    context: context,
+                    firstDate: DateTime(1960, 1, 1),
+                    lastDate: DateTime(2025, 12, 31),
+                  );
+                  if (date != null) {
+                    setState(() {
+                      registrationDate = date;
+                      regDateController.text = DateFormat(
+                        "yyyy-MM-dd",
+                      ).format(registrationDate!);
+                    });
+                  }
+                },
+              ),
+            ),
             readOnly: true,
             controller: regDateController,
           ),
-          FilledButton.icon(
-            label: Text("Pick Registration Date"),
-            icon: Icon(Icons.calendar_today),
-            onPressed: () async {
-              DateTime? date = await showDatePicker(
-                context: context,
-                firstDate: DateTime(1960, 1, 1),
-                lastDate: DateTime(2025, 12, 31),
-              );
-              if (date != null) {
-                setState(() {
-                  registrationDate = date;
-                  regDateController.text = DateFormat(
-                    "yyyy-MM-dd",
-                  ).format(registrationDate!);
-                });
-              }
-            },
-          ),
+          // FilledButton.icon(
+          //   label: Text("Pick Registration Date"),
+          //   icon: Icon(Icons.calendar_today),
+          //   onPressed: () async {
+          //     DateTime? date = await showDatePicker(
+          //       context: context,
+          //       firstDate: DateTime(1960, 1, 1),
+          //       lastDate: DateTime(2025, 12, 31),
+          //     );
+          //     if (date != null) {
+          //       setState(() {
+          //         registrationDate = date;
+          //         regDateController.text = DateFormat(
+          //           "yyyy-MM-dd",
+          //         ).format(registrationDate!);
+          //       });
+          //     }
+          //   },
+          // ),
           SizedBox(height: 20),
           FilledButton(
             onPressed: () async {
