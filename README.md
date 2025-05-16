@@ -4,7 +4,7 @@
 
 ### Lecture 14 -  Data Entry
 
-
+Implemented a vehicle entry form
 
 
 
