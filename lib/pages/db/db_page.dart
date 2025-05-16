@@ -23,7 +23,7 @@ class DbPage extends StatelessWidget {
             case DbFetching _:
               return DbWaitingView();
             case DbLoaded _:
-              return DbDisplayView(cars: cubit.cars);
+              return DbDisplayView(cars: cubit.cars, addCar: cubit.addCar);
             default:
               return DbWaitingView();
           }

@@ -2,20 +2,9 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 14 -  Firebase Operations
+### Lecture 14 -  Data Entry
 
-Created a page `db_page.dart` to interact with Firebase with an associated `Cubit`. We also created a new object class `Car` together with it's associated data methods.
 
-```dart
-class Car {
-  final String make;
-  final String model;
-  final String licencePlate;
-  final int year;
-  final DateTime registrationDate;
-  ...
-}
-```
 
 
 

@@ -34,7 +34,7 @@ class Car {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toFirestoreMap() {
     return <String, dynamic>{
       'make': make,
       'model': model,
@@ -44,7 +44,29 @@ class Car {
     };
   }
 
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'make': make,
+      'model': model,
+      'licencePlate': licencePlate,
+      'year': year,
+      'registrationDate': registrationDate.millisecondsSinceEpoch,
+    };
+  }
+
   factory Car.fromMap(Map<String, dynamic> map) {
+    return Car(
+      make: map['make'] as String,
+      model: map['model'] as String,
+      licencePlate: map['licencePlate'] as String,
+      year: map['year'] as int,
+      registrationDate: DateTime.fromMillisecondsSinceEpoch(
+        map['registrationDate'] as int,
+      ),
+    );
+  }
+
+  factory Car.fromFirestoreMap(Map<String, dynamic> map) {
     return Car(
       make: map['make'] as String,
       model: map['model'] as String,
