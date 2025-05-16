@@ -36,7 +36,7 @@ class FutureBuilderPage extends StatelessWidget {
                     }).toList(),
               );
             } else {
-              return Container(
+              return SizedBox(
                 width: double.infinity,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
