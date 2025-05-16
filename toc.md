@@ -30,5 +30,7 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 13 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L13.01) Implemented Future Builder
 - [Lecture 13 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L13.02) Implemented Stream Builder
 - [Lecture 13 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L13.03) Implemented Shimmer 
+- [Lecture 14 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L14.00) Starting point - Firestore
+
 
 
