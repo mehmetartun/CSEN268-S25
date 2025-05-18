@@ -2,9 +2,26 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 15 -  Cloud Functions Start
+### Lecture 15 - Step 1 - Cloud Functions Installed
 
-In this lecture we will set up cloud functions
+We install cloud functions 
+```zsh
+flutter pub add cloud_functions
+```
+
+And we also save a `google_service_account.json` in our root directory. We also create a shell script called `emulators_functions.sh`
+```zsh
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/google_service_account.json"
+firebase emulators:start --only functions
+```
+We need to change the mode to `755` for this shell script and run it as `./emulator_functions.sh`.
+
+You should also immediately add this to your `.gitignore` file:
+```zsh
+**/node_modules
+**/google_service_account.json
+```
+
 
 
 
