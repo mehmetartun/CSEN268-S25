@@ -2,7 +2,7 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 15 -  Step 3 - Calling Cloud functions From the App
+### Lecture 15 -  Step 3 - Event Triggers
 
 In this section we implemented the event trigger due to Firestore database document creation
 ```javascript
