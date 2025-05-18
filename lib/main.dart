@@ -1,5 +1,7 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:csen268_s25/pages/alert_page.dart';
 import 'package:csen268_s25/pages/db/db_page.dart';
+import 'package:csen268_s25/pages/functions_demo.dart';
 import 'package:csen268_s25/pages/future_builder_page.dart';
 import 'package:csen268_s25/pages/stream_builder_page.dart';
 import 'package:firebase_app_installations/firebase_app_installations.dart';
@@ -29,7 +31,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  print(await FirebaseInstallations.instance.getId());
+  // FirebaseFunctions.instance.useFunctionsEmulator('127.0.0.1', 5001);
+  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
 
   final messaging = FirebaseMessaging.instance;
   final settings = await messaging.requestPermission(
@@ -116,7 +119,7 @@ class MyApp extends StatelessWidget {
                 highContrastDarkTheme: theme.darkHighContrast(),
                 highContrastTheme: theme.lightHighContrast(),
                 themeMode: themeState.themeMode,
-                home: GenericPage(title: "Cloud Functions"),
+                home: FunctionsDemoPage(),
               );
             },
           ),
