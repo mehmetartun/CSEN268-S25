@@ -5,6 +5,7 @@ import 'package:csen268_s25/pages/functions_demo.dart';
 import 'package:csen268_s25/pages/future_builder_page.dart';
 import 'package:csen268_s25/pages/stream_builder_page.dart';
 import 'package:firebase_app_installations/firebase_app_installations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +32,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAuth.instance.signInAnonymously();
+
   // FirebaseFunctions.instance.useFunctionsEmulator('127.0.0.1', 5001);
-  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
+  // FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
 
   final messaging = FirebaseMessaging.instance;
   final settings = await messaging.requestPermission(
