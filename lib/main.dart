@@ -116,7 +116,7 @@ class MyApp extends StatelessWidget {
                 highContrastDarkTheme: theme.darkHighContrast(),
                 highContrastTheme: theme.lightHighContrast(),
                 themeMode: themeState.themeMode,
-                home: DbPage(),
+                home: GenericPage(title: "Cloud Functions"),
               );
             },
           ),
