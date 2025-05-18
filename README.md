@@ -2,9 +2,19 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 15 -  Cloud Functions Start
+### Lecture 15 -  Step 1 - Cloud Functions Installed and Run
 
-In this lecture we will set up cloud functions
+Installed Cloud Functions with
+```zsh
+firebase init
+```
+and created `google_service_account.json` giving us the keys to access Firebase. This is added to gitignore along with node modules:
+```zsh
+**/node_modules
+**/google_service_account.json
+```
+
+
 
 
 
