@@ -1,3 +1,4 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:csen268_s25/pages/alert_page.dart';
 import 'package:csen268_s25/pages/db/db_page.dart';
 import 'package:csen268_s25/pages/future_builder_page.dart';
@@ -29,6 +30,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
   print(await FirebaseInstallations.instance.getId());
 
   final messaging = FirebaseMessaging.instance;
