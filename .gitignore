@@ -38,8 +38,13 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+**/google_service_account.json
+
+**/node_modules
 
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
