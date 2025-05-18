@@ -2,35 +2,21 @@
 
 [Table of Contents](/toc.md)
 
-### Lecture 15 -  Step 2 - Calling Cloud functions From the App
+### Lecture 15 -  Step 3 - Calling Cloud functions From the App
 
-The method to call the functions from the app is via:
-```dart
-  final HttpsCallable helloWorldCall = FirebaseFunctions.instance.httpsCallable(
-    'helloWorldCall',
-  );
-```
-declaring the callable function in Flutter. Then the call is made by passing a `data` map to the callable function:
-```dart
-  HttpsCallableResult result = await addDataCall.call({
-                  'collection': 'function_test',
-                  'map': {'firstName': 'John', 'lastName': 'Doe'},
-                });
-```
-
-The result that comes back has a property called `data` which contains the returned value.
-
-On the functions side, we initialize the app to connect to Firestore
+In this section we implemented the event trigger due to Firestore database document creation
 ```javascript
-initializeApp();
+exports.onUserCreated = onDocumentCreated("/function_test/{userId}" , async (event)=>{
+  await getFirestore().collection('log_test').add(
+    {
+      'userId':event.params.userId,
+      'createTime':event.data.createTime,
+    }
+  )
+});
 ```
+This matches any document with a path `/function_test/{userId}` and whenever a document with this pattern is created, it triggers this function. In turn we can act on this data.
 
-To connect to Firestore we call:
-```javascript
-  var documentReference = await getFirestore().collection(collection).add(map);
-```
-
-To write data (in this case `map`) to the given collection as a new document. Returned documentReference can then be used if necessary.
 
 ### Setting up your environment before the lecture
 
