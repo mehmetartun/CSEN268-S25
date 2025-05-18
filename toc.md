@@ -37,7 +37,8 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 15 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L15.00) Cloud Functions
 - [Lecture 15 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L15.01) Cloud Functions Running
 - [Lecture 15 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L15.02) Calling Functions From App
-- [Lecture 15 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L15.01) Firestore Event Triggers
+- [Lecture 15 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L15.03) Firestore Event Triggers
+- [Lecture 15 - 04](https://github.com/mehmetartun/CSEN268-S25/tree/L15.04) Firebase Storage
 
 
 
