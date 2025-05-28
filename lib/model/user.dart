@@ -10,12 +10,13 @@ class User {
   final String imageUrl;
   final String uid;
 
-  User(
-      {required this.firstName,
-      required this.lastName,
-      required this.email,
-      required this.imageUrl,
-      required this.uid});
+  User({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.imageUrl,
+    required this.uid,
+  });
 
   User copyWith({
     String? firstName,
