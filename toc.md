@@ -44,5 +44,6 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 17 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L17.01) Testing - Unit
 - [Lecture 17 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L17.02) Testing - Application
 - [Lecture 17 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L17.03) Testing - Widgets
+- [Lecture 17 - 04](https://github.com/mehmetartun/CSEN268-S25/tree/L17.04) Testing - Widgets
 
 
