@@ -1,11 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:csen268_s25/pages/alert_page.dart';
 import 'package:csen268_s25/pages/db/db_page.dart';
-import 'package:csen268_s25/pages/functions_demo.dart';
-import 'package:csen268_s25/pages/future_builder_page.dart';
+import 'package:csen268_s25/pages/genai/genai_page.dart';
 import 'package:csen268_s25/pages/image_upload_page.dart';
-import 'package:csen268_s25/pages/stream_builder_page.dart';
-import 'package:firebase_app_installations/firebase_app_installations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -16,8 +12,6 @@ import 'blocs/notifications/bloc/notifications_bloc.dart';
 import 'blocs/theme/cubit/theme_cubit.dart';
 import 'firebase_options.dart';
 
-import 'pages/generic_page.dart';
-import 'pages/messaging_page.dart';
 import 'repositories/authentication/authentication_repository.dart';
 import 'theme/theme.dart';
 import 'theme/util.dart';
@@ -36,7 +30,7 @@ void main() async {
   await FirebaseAuth.instance.signInAnonymously();
 
   // FirebaseFunctions.instance.useFunctionsEmulator('127.0.0.1', 5001);
-  // FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
+  FirebaseFunctions.instance.useFunctionsEmulator('localhost', 5001);
 
   final messaging = FirebaseMessaging.instance;
   final settings = await messaging.requestPermission(
@@ -123,7 +117,8 @@ class MyApp extends StatelessWidget {
                 highContrastDarkTheme: theme.darkHighContrast(),
                 highContrastTheme: theme.lightHighContrast(),
                 themeMode: themeState.themeMode,
-                home: ImageUploadPage(),
+                home: GenaiPage(),
+                // home: DbPage(),
               );
             },
           ),
