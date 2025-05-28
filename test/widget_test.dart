@@ -5,13 +5,48 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:csen268_s25/main.dart';
+import 'package:csen268_s25/model/user.dart';
+import 'package:csen268_s25/widgets/user_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Generic Page Test', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
-    expect(find.text('Testing Start'), findsOneWidget);
+  Widget createWidget(Widget child) {
+    return MaterialApp(home: Scaffold(body: child));
+  }
+
+  testWidgets('UserListTile Widget Test', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      createWidget(
+        UserListTile(
+          user: User(
+            firstName: "John",
+            lastName: "Doe",
+            email: "john@doe.com",
+            imageUrl: "https://placehold.co/500x500",
+            uid: "1234567890",
+          ),
+        ),
+      ),
+    );
+    expect(find.text('John Doe'), findsOneWidget);
+    expect(find.text('JD'), findsOneWidget);
+    expect(find.text('john@doe.com'), findsOneWidget);
+    await tester.pumpWidget(
+      createWidget(
+        UserListTile(
+          user: User(
+            firstName: "John",
+            lastName: "",
+            email: "john@doe.com",
+            imageUrl: "https://placehold.co/500x500",
+            uid: "1234567890",
+          ),
+        ),
+      ),
+    );
+    expect(find.text('John'), findsOneWidget);
+    expect(find.text('J'), findsOneWidget);
+    expect(find.text('john@doe.com'), findsOneWidget);
   });
 }

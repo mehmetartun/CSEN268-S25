@@ -42,6 +42,6 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 16 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L16.00) Generative AI
 - [Lecture 17 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L17.00) Testing
 - [Lecture 17 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L17.01) Testing - Unit
-
+- [Lecture 17 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L17.02) Testing - Application
 
 
