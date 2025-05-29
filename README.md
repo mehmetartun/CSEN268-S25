@@ -59,6 +59,39 @@ jokeTeller,
 ```
 Note that it's `onCallGenkit` rather than `onCall`.
 
+## Running in the Simulator 
+
+1.  We created a function `./emulators_functions.sh` and gave it execute permission with `chmod 755 emulators_functions.sh`. The contents of this function is:
+    ```zsh
+    export GOOGLE_APPLICATION_CREDENTIALS="/Users/mehmetartun/Development/csen268/CSEN268-S25/google_service_account.json"
+    firebase emulators:start --only functions
+    ```
+    to have reference to your file `google_service_account.json`.
+
+2.  The other thing you need to do is to set:
+    ```xml
+    <manifest>
+      <application
+          ...
+          android:usesCleartextTraffic="true"
+          ...
+          >
+          ...
+      </application>
+      ...
+    </manifest>
+    ```
+    in the `<application>` section of the [AndroidManifest.xml](/android/app/src/main/AndroidManifest.xml)
+
+3.  Before running simulator you **must** deploy the functions to Firebase if you are using a namespace. Only then you will be able to run it in simulator mode.
+    ```zsh
+    firebase deploy --only functions
+    ```
+    will allow you deploy the functions to the cloud. Once you've done this, you will be able to use these functions with the simulator.
+
+
+
+
 ### Setting up your environment before the lecture
 
 Each lecture is stored under a separate tag. In your computer do the following
