@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "csen268-s25-g0"
+  },
+  "targets": {
+    "csen268-s25-g0": {
+      "hosting": {
+        "clientApp": [
+          "csen268-s25-g0"
+        ],
+        "adminApp": [
+          "csen268-s25-g0-admin"
+        ]
+      }
+    }
   }
 }
