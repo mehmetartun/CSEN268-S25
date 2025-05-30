@@ -4,177 +4,139 @@
 
 
 
-## Lecture 17 - Testing
-In this lecture we will explore testing of widgets and the app in general
+## Lecture 18 - Flutter Web, WebView and Ads
+In this lecture we will explore Flutter Web, WebView and Ads
 
-### Step 03 - Fixing an Error in a Complex Widget Test
-In the previous step we saw that the following test failed:
-```dart
-    await tester.pumpWidget(createWidget(
-      UserListTile(
-          user: User(
-        firstName: "John",
-        lastName: "",
-        email: "john@doe.com",
-        imageUrl: "https://placehold.co/500x500",
-        uid: "1234567890",
-      )),
-    ));
-    expect(find.text('John'), findsOneWidget);
-    expect(find.text('J'), findsOneWidget);
-    expect(find.text('john@doe.com'), findsOneWidget);
-```
-because the **last name** was empty string.
+### Step 00 - Start with a generic page and deploy to web
+We point to a generic page titled **Welcome to Web** and we will deploy this to the web.
 
-To fix this we implement the following in the `UserAvatar` in [user_avatar.dart](/lib/widgets/user_avatar.dart):
-```dart
-  Widget build(BuildContext context) {
-    String initials = "";
-    if (user.firstName.isNotEmpty) {
-      initials += user.firstName[0].toUpperCase();
-    }
-    if (user.lastName.isNotEmpty) {
-      initials += user.lastName[0].toUpperCase();
-    }
-    if (initials == "") {
-      initials = "-";
-    }
-
-    return CircleAvatar(
-      child: Text(
-        initials,
-      ),
-    );
-  }
-```
-When we now try running our test we get an error again:
+### Build for Web
+We first build our project for web:
 ```zsh
-This was caught by the test expectation on the following line:
-  file:///Users/mehmetartun/Development/csen268/CSEN268-F24/test/widget_test.dart line 45
-The test description was:
-  UserListTile Widget Test
-════════════════════════════════════════════════════════════════════════════════════════════════════
-00:01 +0 -1: UserListTile Widget Test [E]                                                                         
-  Test failed. See exception logs above.
-  The test description was: UserListTile Widget Test
-  
+>>> flutter build web
 
-To run this test again: /Users/mehmetartun/Utilities/flutter/bin/cache/dart-sdk/bin/dart test /Users/mehmetartun/Development/csen268/CSEN268-F24/test/widget_test.dart -p vm --plain-name 'UserListTile Widget Test'
-00:01 +0 -1: Some tests failed.    
+Font asset "CupertinoIcons.ttf" was tree-shaken, reducing it from 257628 to 1172 bytes (99.5% reduction).
+Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 7692 bytes (99.5%
+reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+Compiling lib/main.dart for the Web...                             18.3s
+✓ Built build/web
 ```
-This time it's not matching the expectation `"John"` as the display name. That's because there is a `space` character that gets printed in:
-```dart
-    return ListTile(
-      leading: UserAvatar(user: user),
-      // The style of the text will be taken from the ListTileTheme
-      title: Text('${user.firstName} ${user.lastName}'),
-      subtitle: Text(user.email),
-    );
+
+### Setup Hosting configuration
+To deploy to **Firebase Hosting** you need to run **firebase init** in order to set up hosting configuration to your [firebase.json](/firebase.json) file:
+```zsh
+MA@MBP:~/Development/csen268/CSEN268-F24> firebase init
+
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/mehmetartun/Development/csen268/CSEN268-F24
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter
+ to confirm your choices. (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to
+ proceed)
+ ◯ Genkit: Setup a new Genkit project with Firebase
+ ◯ Functions: Configure a Cloud Functions directory and its files
+ ◯ App Hosting: Configure an apphosting.yaml file for App Hosting
+❯◯ Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys
+ ◯ Storage: Configure a security rules file for Cloud Storage
+ ◯ Emulators: Set up local emulators for Firebase products
+ ◯ Remote Config: Configure a template file for Remote Config
+(Move up and down to reveal more choices)
 ```
-We can cover this case by modifying the definition of the `UserListTile` [user_list_tile.dart](/lib/widgets/user_list_tile.dart):
-```dart
-  Widget build(BuildContext context) {
-    String displayName = '${user.firstName} ${user.lastName}';
-    displayName = displayName.trim();
-    if (displayName.isEmpty) {
-      displayName = "-";
-    }
-    return ListTile(
-      leading: UserAvatar(user: user),
-      title: Text(displayName),
-      subtitle: Text(user.email),
-    );
+after that you need to specify your **public** directory. This will be `build/web` for a Flutter project. Enter `build/web` for the public directory:
+```zsh
+=== Project Setup
+
+First, let's associate this project directory with a Firebase project.
+You can create multiple project aliases by running firebase use --add, 
+but for now we'll just set up a default project.
+
+i  Using project fir-messaging-8b691 (firebase-messaging)
+
+=== Hosting Setup
+
+Your public directory is the folder (relative to your project directory) that
+will contain Hosting assets to be uploaded with firebase deploy. If you
+have a build process for your assets, use your build's output directory.
+
+? What do you want to use as your public directory? build/web
+? Configure as a single-page app (rewrite all urls to /index.html)? (y/N) y
+? Set up automatic builds and deploys with GitHub? (y/N) N
+? File build/web/index.html already exists. Overwrite? (y/N) N
+```
+
+Now your [firebase.json](/firebase.json) contains hosting configuration:
+```json
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 ```
-This means we can now write test cases for the following cases:
 
+#### Deploying
+```zsh
+firebase deploy --only hosting
 
-| firstName | lastName | initials  | displayName |
-| :-:|:-:|:-:|:-:|
-| input | input | expect | expect |
-|  `"John"` | `"Doe"` | `"JD"` | `"John Doe"` |
-|  `"John"` | `""` | `"J"` | `"John"` |
-|  `""` | `"Doe"` | `"D"` | `"Doe"` |
-|  `""` | `""` | `"-"` | `"-"` |
+=== Deploying to 'fir-messaging-8b691'...
 
-We now have a complete test coverage:
-```dart
-    await tester.pumpWidget(createWidget(
-      UserListTile(
-          user: User(
-        firstName: "John",
-        lastName: "Doe",
-        email: "john@doe.com",
-        imageUrl: "https://placehold.co/500x500",
-        uid: "1234567890",
-      )),
-    ));
-    expect(find.text('John Doe'), findsOneWidget);
-    expect(find.text('JD'), findsOneWidget);
-    expect(find.text('john@doe.com'), findsOneWidget);
-    await tester.pumpWidget(createWidget(
-      UserListTile(
-          user: User(
-        firstName: "John",
-        lastName: "",
-        email: "john@doe.com",
-        imageUrl: "https://placehold.co/500x500",
-        uid: "1234567890",
-      )),
-    ));
-    expect(find.text('John'), findsOneWidget);
-    expect(find.text('J'), findsOneWidget);
-    expect(find.text('john@doe.com'), findsOneWidget);
-    await tester.pumpWidget(createWidget(
-      UserListTile(
-          user: User(
-        firstName: "",
-        lastName: "Doe",
-        email: "john@doe.com",
-        imageUrl: "https://placehold.co/500x500",
-        uid: "1234567890",
-      )),
-    ));
-    expect(find.text('Doe'), findsOneWidget);
-    expect(find.text('D'), findsOneWidget);
-    expect(find.text('john@doe.com'), findsOneWidget);
-    await tester.pumpWidget(createWidget(
-      UserListTile(
-          user: User(
-        firstName: "",
-        lastName: "",
-        email: "john@doe.com",
-        imageUrl: "https://placehold.co/500x500",
-        uid: "1234567890",
-      )),
-    ));
-    expect(find.text('-'), findsExactly(2));
-    expect(find.text('john@doe.com'), findsOneWidget);
+i  deploying hosting
+i  hosting[fir-messaging-8b691]: beginning deploy...
+i  hosting[fir-messaging-8b691]: found 32 files in build/web
+✔  hosting[fir-messaging-8b691]: file upload complete
+i  hosting[fir-messaging-8b691]: finalizing version...
+✔  hosting[fir-messaging-8b691]: version finalized
+i  hosting[fir-messaging-8b691]: releasing new version...
+✔  hosting[fir-messaging-8b691]: release complete
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/csen268-s25-g0/overview
+Hosting URL: https://csen268-s25-g0.web.app
 ```
-Where we used `findsExactly(2)` which means that both in the avatar and in the 
-displayName we will get a `-` that means we need to get exactly two of these to pass the test.
 
+### Accessing the Web App
+The web app will be located at [https://csen268-s25-g0.web.app](https://csen268-s25-g0.web.app/)
 
-
+### Git ignore  
+Add `.firebase/` to your `.gitignore`
 
 ### Setting up your environment before the lecture
 
-Each lecture is stored under a separate tag. In your computer do the following
+Each lecture is stored under a separate tag. On your computer do the following
 
     git clone <Repository Name>
     git pull
     git tag -l
 
-This will list you all the tags in the repository such as
+This will list all the tags in the repository such as
 
-    L05.00
-    L05.01
+    Lecture4
+    Lecture5
+    Lecture6
     ...
-    L06.00
-    ...
 
-In order to pull a particular tag like L06.00 to your computer
+In order to pull a particular tag to your computer
 
-    git checkout tags/L06.00 -b l06_00
-
+    git checkout tags/Lecture5_start -b Lecture5_study
 

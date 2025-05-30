@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
               highContrastDarkTheme: theme.darkHighContrast(),
               highContrastTheme: theme.lightHighContrast(),
               themeMode: themeState.themeMode,
-              home: GenericPage(title: "Testing Start"),
+              home: GenericPage(title: "Welcome to Web"),
             );
           },
         ),
