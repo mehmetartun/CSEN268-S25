@@ -47,5 +47,6 @@ The content in this repo follows the CSEN268 Spring25 Lecture at Santa Clara Uni
 - [Lecture 18 - 00](https://github.com/mehmetartun/CSEN268-S25/tree/L18.00) Flutter Web
 - [Lecture 18 - 01](https://github.com/mehmetartun/CSEN268-S25/tree/L18.01) Setting Targets and Deploying Admin App
 - [Lecture 18 - 02](https://github.com/mehmetartun/CSEN268-S25/tree/L18.02) Webview
+- [Lecture 18 - 03](https://github.com/mehmetartun/CSEN268-S25/tree/L18.03) InAppWebView
 
 

@@ -47,6 +47,7 @@ dependencies:
   cloud_functions: ^5.5.0
   firebase_auth: ^5.5.3
   webview_flutter: ^4.13.0
+  flutter_inappwebview: ^6.1.5
 
   
 
