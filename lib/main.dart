@@ -1,6 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:csen268_s25/pages/genai/genai_page.dart';
 import 'package:csen268_s25/pages/generic_page.dart';
+import 'package:csen268_s25/pages/web_view_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
               highContrastDarkTheme: theme.darkHighContrast(),
               highContrastTheme: theme.lightHighContrast(),
               themeMode: themeState.themeMode,
-              home: GenericPage(title: "Welcome to Web"),
+              home: WebViewPage(),
             );
           },
         ),
